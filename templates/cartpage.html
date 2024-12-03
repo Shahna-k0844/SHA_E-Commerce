@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% extends "common.html" %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Cart{% endblock title %}</title>
+</head>
+<body>
+    <section>
+        {% block contents %}
+        {% if products_in_cart %}
+            <!-- <h4 style="font-family: fantasy;padding-inline:4.7em;padding-top:1em">My Bag</h4> -->
+        {% for i in products_in_cart %}
+            
+        <div style="padding-inline: 6em;display:flex;gap:50px;padding-top:2em;padding-bottom:1em;width:58%" class="border border-light-subtle ">
+            
+            <div>
+                <img style="width: 170px; height: 200px;" src="{{i.product.image.url}}" alt="">
+            </div>
+            <div>
+                <p style="color:rgb(98, 43, 64);font-weight: 700;padding-top:1.5em;line-height:0">{{i.product.name}}</p>
+                <p>Qantity :<strong>{{i.quantity}}</strong></p>
+                <p>Price : <strong>{{i.price}}</strong></p>
+                <div style="padding-top: 4.5em;gap:3.5em;display:flex;padding-left:10.5em">
+                    <div style="display: flex;gap:10px;align-items:center;text-align:center">
+                        <a style="text-decoration: none;color:black;display: flex;gap:6px;" href="{% url "remove" i.id %}">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                    <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                                  </svg>
+                            </div>
+                            <div>
+                                <p>Delete item</p>
+                            </div>
+                        </a> 
+                    </div>
+                   
+                    <div>
+                        <a style="text-decoration: none;color:black;display: flex;gap:6px;" href="{% url "movetowish" i.product.id %}">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p>Move to wishlist
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div style="padding-bottom: 7em;">
+            <div class=" border-dark-subtle p-3 rounded shadow p-5"style="border: 1 px solid black;position:absolute;top:10em;left:64em">
+        
+                <h5><strong>PRICE DETAILS</strong></h5>
+                <p>Price of {{quantity}} items</p>
+                <h6>Total Amount : {{total}}</h6> <br>
+                <a href="{% url "placeorder" %}">
+                    <button type="submit" class="btn" style="background-color: rgb(87, 10, 62); color: white;width:170px;top:1em;border-radius:0%;font-weight:500">Place Order</button>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    
+            
+            {% else %}
+            <h5 style="padding-top: 5em;padding-bottom:10em;padding-inline:27em">Your Bag is Empty!!!</h5>
+            {% endif %}
+        
+        {% endblock contents %}
+    </section>
+</body>
+</html>

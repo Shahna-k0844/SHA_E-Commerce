@@ -1,0 +1,290 @@
+body{
+    margin: 0;
+}
+.logo{
+    height: 80px;
+    width: 120px;
+    background-color: transparent;
+}
+header{
+    position: static;
+    /* z-index: 1000; */
+    width: 100%;
+} 
+.search{
+    border-radius: 5px;
+    border:1px solid gray;
+    width: 20em;
+    background-color: rgb(246, 240, 248);
+}
+.search1{
+    padding-inline: 3em;
+}
+.searchicon{
+    position: absolute;
+    left: 46em;
+    top:1.96em;
+    align-items: center;
+}
+.header1{
+    display: flex;
+    align-items: center;
+    border: 1px solid rgb(171, 171, 171);
+    gap: 100px;
+    padding-inline-start: 8em;
+    background-color: rgb(246, 232, 244);
+    justify-content: space-between;
+   
+} 
+.header2 a{
+    text-decoration: none;
+    color: gray;
+}
+.header2{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgb(81, 80, 80);
+    height: 2.8em;
+    background-color: rgb(252, 249, 252);
+    padding-inline: 25em;
+    
+    
+}
+.items{
+    display: flex;
+    gap: 3em;
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+}
+.cartarea{
+    color: rgb(73, 73, 73);
+    text-decoration: none;
+}
+.links{
+    display: flex;
+    gap: 30px;
+    padding-inline: 8em;
+}
+
+/* 
+.categories {
+    display: flex;
+    gap: 15px;
+} */
+.categories {
+    display: flex;
+    gap: 20px; /* Space between categories */
+}
+
+.category-container {
+    position: relative;
+    display: inline-block;
+    flex-direction: column;
+}
+
+.category-name {
+    font-size: 16px;
+    color: black;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.subcategory-list {
+    display: none; /* Hide the subcategories by default */
+    position: absolute;
+    top: 100%;
+    width: 160px; /* Position below the category */
+    left: 0;
+    background-color: #f9f9f9;
+    padding: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    z-index: 1000;
+}
+.logoutdisplay{
+    color: rgb(73, 73, 73);
+    text-decoration: none;
+}
+.logout {
+    display: none; /* Hide the subcategories by default */
+    position: absolute;
+    top: 3.6em;
+    /* left: 0; */
+    width: 100px; /* Position below the category */
+    right: 4em;
+    background-color: #f9f9f9;
+    padding: 5px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    z-index: 1000;
+}
+.dropdown-container:hover .logout{
+    display: block;
+}
+.logout ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.logout li {
+    padding: 5px 0;
+}
+
+.logout li a {
+    text-decoration: none;
+    color: #333;
+}
+.subcategory-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.subcategory-list li {
+    padding: 5px 0;
+}
+
+.subcategory-list li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.category-container:hover .subcategory-list {
+    display: block; /* Show the subcategories on hover */
+}
+.modal-backdrop {
+    z-index: 1040 !important;
+  }
+  .modal {
+    z-index: 1050 !important;
+  }
+  
+
+/* .category {
+    position: relative;
+    margin-right: 20px;
+}
+
+.category a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+}
+.dropdown-container {
+    position: relative;
+display: inline-block;
+}
+
+.logout-dropdown {
+display: none; /* Hide the dropdown by default */
+/* position: absolute;
+top: 25px; 
+left: 0;
+background-color: #f9f9f9;
+min-width: 80px;
+padding: 5px;
+text-align: center;
+border-radius: 4px;
+box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+z-index: 1;
+font-size: 14px;
+color: #333;
+}
+
+.cartarea:hover + .logout-dropdown {
+display: block; /* Show the dropdown when hovering over the icon */
+/* } */
+  
+/* select {
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+border: none;
+outline: none;
+background: none;
+font-size: 16px;
+color: black;
+padding: 10px;
+cursor: pointer;
+} */
+
+/* Create custom arrow icon */
+/* .dropdown {
+position: relative;
+}
+
+.dropdown::after {
+content: '▼'; 
+position: absolute;
+right: 10px;
+top: 12px;
+pointer-events: none;
+color: #452121;
+} */
+
+/* Remove blue hover background from <option> */
+/* select option {
+background: white;
+color: black;
+padding: 10px;
+}
+
+select option:hover {
+background-color: yellow; 
+color: black; 
+} */
+
+/* Custom select box styling */
+/* select {
+width: 150px;
+height: 40px;
+border: 1px solid #ccc;
+border-radius: 5px;
+} */
+
+
+/* Dropdown menu */
+/* .dropdown {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: 40px;
+    left: 0;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+} */
+
+/* .dropdown a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {
+    background-color: #ddd;
+}  */
+
+/* Show the dropdown when hovering over the category */
+/* .category:hover .dropdown {
+    display: block;
+} */ 
+    /* Style for dropdown without JS */
+
+/* @media (prefers-color-scheme: light) {
+    .modal {
+        background-color: #fff; 
+        color: #000; 
+    }
+} */
+
+
+
+
+
+
+ 

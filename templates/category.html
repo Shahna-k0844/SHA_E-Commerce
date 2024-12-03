@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% extends "common.html" %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Category{% endblock title %}</title>
+</head>
+<body>
+    {% block contents %}
+    <div style="padding-inline: 10em;padding-top: 5em;display:flex;flex-wrap:wrap;gap:60px">
+        {% for i in category %}
+
+        <a style="text-decoration:none;color:rgb(183, 165, 165)" href="{% url "catcat" i.id %}">
+            <div style="text-align: center;">
+                <img style="border:1px solid rgb(188, 186, 186);width:200px;height:250px" src="{{i.image.url}}" alt="">
+                <h4 style="text-decoration:none;color:rgb(88, 70, 70);font-family:Georgia, 'Times New Roman', Times, serif, Tahoma, Geneva, Verdana, sans-serif, Helvetica, sans-serif;font-weight:400;font-size:15pt">{{i.name}}</h4>
+                {% for catcategory in catcategories %}
+
+                <li><a href="{% url 'catcatproducts' catcategory.id %}">{{ catcategory.categoryname }}</a></li>
+                {% endfor %}
+
+    
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+   
+    {% endblock contents %}
+</body>
+</html>

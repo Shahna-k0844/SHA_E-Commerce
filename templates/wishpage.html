@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% extends "common.html" %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Wishlist{% endblock title %}</title>
+</head>
+<body>
+    {% block contents %}
+    <div style="padding-inline: 15em;">
+        {% if wishlist_items %}
+        <h4 style="padding-top: 1em;">My Wishlist</h4>
+        <div>
+            {% for i in wishlist_items %}
+            <div style="display:flex;gap:50px;padding-top:2em;padding-bottom:1em;width:85%" class="border border-light-subtle ">
+                    
+                <div>
+                    <a style="text-decoration:none" href="{% url "viewproduct" i.id %}">
+
+                    <img style="width: 170px; height: 200px;" src="{{i.product.image.url}}" alt=""></a>
+                </div>
+                <div>
+                    <p style="color:rgb(98, 43, 64);font-weight: 700;padding-top:1.5em;line-height:0">{{i.product.name}}</p>
+                    <p>{{i.product.describein1}}</p>
+                    <p>Price : <strong>{{i.product.price}}</strong></p>
+                    <div style="padding-top: 4.5em;gap:3.5em;display:flex;padding-left:22em">
+                        <div style="display: flex;gap:10px;align-items:center;text-align:center">
+                            <a style="text-decoration: none;color:black;display: flex;gap:6px;" href="{% url "remove_wishitem" i.id %}">
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p>Delete item</p>
+                                </div>
+                            </a> 
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+    
+            {% endfor %}
+        
+        </div>
+        {% else %}
+        <h4 style="padding-top: 6em;padding-bottom:6em;padding-inline:15em">No items in your wishlist</h4>
+        {% endif %}
+    
+    </div>
+    
+    {% endblock contents %}
+    
+</body>
+</html>

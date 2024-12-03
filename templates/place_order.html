@@ -1,0 +1,347 @@
+{% extends "common.html" %}
+{% comment %} <!DOCTYPE html>
+
+{% extends "common.html" %}
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}order{% endblock title %}</title>
+    <!-- <link rel="stylesheet" href="{% static "css/place_orders.css" %}"> -->
+     <link rel="stylesheet" href="{% static "css/place_orders.css" %}">
+</head>
+<body>
+    {% block contents %}
+    <div class="place_order">
+        <h3>Place your Order</h3>
+        <h4>user : {{user.username}}</h4>
+        <h4>email : {{user.email}}</h4>
+        <table>
+            <tr>
+                <th>ITEM</th>
+                <th>QUANTITY</th>
+                <th>PRICE</th>
+            </tr>
+        
+            {% for i in cartitems %}
+                <tr>
+                    <td>{{i.product.name}}</td>
+                    <td>{{i.quantity}}</td>
+                    <td>{{i.price}}</td>
+                </tr>    
+            {% endfor %}
+        </table>
+        <h4>Total = $ {{total}}</h4>
+        <h2>Enter your address here</h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div>
+                <h6>Enter your Name</h6>
+                <input type="text" name="name"value="{{exist_name}}" required>
+                <!-- <input type="text"> -->
+    
+            </div>
+            <div>
+                <h6>Enter your Name</h6>
+                <input type="text" name="mobile" value="{{exist_mobile}}" required>
+    
+            </div>
+            <div>
+                <h6>Enter your Name</h6>
+                <input type="text" name="pincode" value="{{exist_pincode}}" required >
+    
+            </div>
+            <div>
+                <h6>Enter your Name</h6>
+                <input type="text" name="locality" value="{{exist_locality}}" required>
+    
+            </div>
+            <div>
+                <h6>Enter your Name</h6>
+                <input type="text" name="flat_building" value="{{exist_flat}}" required>
+    
+            </div>
+            <div>
+                <h6>Enter your Name</h6>
+                <input type="text" name="landmark" value="{{exist_landmark}}">
+    
+            </div>
+            <div>
+                <h6>Enter your Name</h6>
+                <input type="text" name="city" value="{{exist_city}}" required>
+    
+            </div>
+            <div>
+                <h6>Enter your Name</h6>
+                <input type="text" name="state" value="{{exist_state}}" required>
+    
+            </div>
+    
+        
+            <div>
+                <a href="{% url "thankyou" %}">
+                    <button type='submit'>order</button>
+                </a>
+        
+            </div>
+        </form>
+    </div>
+
+    {% endblock contents %}
+</body>
+</html> {% endcomment %}
+
+{% load static %}
+
+{% block title %}Order{% endblock title %}
+<link rel="stylesheet" href="{% static "css/placeorder.css" %}">
+
+
+
+{% block contents %}
+<div class="place_order" style="padding-inline: 14em;padding-top:2em">
+    <div >
+        <h4 style="font-weight: 600;color:rgb(72, 8, 53);font-family:sans-serif;padding-bottom:1em">Place your Order</h4>
+        <!-- <h6>User: {{ user.username }}</h6>
+        <h6 style="padding-bottom:1.3em">Email: {{ user.email }}</h6> -->
+    
+    </div>
+    
+    <table style="  border: 1px solid rgb(122, 8, 77);
+    box-shadow: 1px 1px 1px 1px 1px gray;padding-top:1em;
+    border-collapse: collapse;
+    width: 80%;
+    height: 50px;
+    padding:20px;
+    text-align: center;">
+        <tr style=" border: 1px solid rgb(109, 11, 73);
+    box-shadow: 1px 1px 1px 1px 1px gray;background-color:rgb(243, 232, 242)">
+            <th style="padding:6px;">ITEM</th>
+            <th >DETAILS</th>
+            <th > QUANTITY</th>
+            <th style="padding-inline:30px;">PRICE</th>
+        </tr>
+
+        {% for i in cartitems %}
+        <tr style=" border: 1px solid rgb(136, 15, 75);
+    box-shadow: 1px 1px 1px 1px 1px gray;">
+            <td style="padding:10px;"><div><img src="{{ i.product.image.url }}" alt="{{ i.product.name }}" width="100" height="105"></div></td>
+            <td><div style="font-size: 9pt;">{{ i.product.name }}</div><div style="font-size: 9pt;">{{ i.product.describein1 }}</div></td>
+            <td>{{ i.quantity }}</td>
+            <td>{{ i.price }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h5 style="padding-top:1em;position:absolute;left:47em;color:rgb(100, 100, 30)">Total= <strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
+        <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
+      </svg> </strong><strong>{{ total }}</strong></h5>
+    <div style="display: flex;">
+        <div style="padding-inline:4em">
+            <h5 style="padding-top: 1.5em;">Delivery Address</h5>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+              <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"/>
+              <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+            </svg>We will deliver your order to this address</p>
+              <div style="border: 1px solid rgb(111, 56, 80);width:fit;padding:20px;line-height:4px;width:fit-content;padding-inline:3em;font-family:sans-serif">
+                  {% if exist_name %}
+                  <p style="color: rgb(117, 127, 15);">Default</p>
+                  <p>{{ exist_name }}</p>
+                  {% endif %}
+                  {% if exist_mobile %}
+                      <p>{{ exist_mobile }}</p>
+                  {% endif %}
+                  {% if exist_pincode %}
+                      <p>{{ exist_pincode }}</p>
+                  {% endif %}
+                  
+                  {% if exist_locality %}
+                      <p> {{ exist_locality }}</p>
+                  {% endif %}
+                  {% if exist_flat %}
+                      <p>{{ exist_flat }}</p>
+                  {% endif %}
+                  {% if exist_landmark %}
+                      <p> {{ exist_landmark }}</p>
+                  {% endif %}
+                  {% if exist_city %}
+                      <p>{{ exist_city }}</p>
+                  {% endif %}
+                  {% if exist_state %}
+                      <p>{{ exist_state }}</p>
+                  {% endif %}
+           
+      
+            </div>
+      
+        
+      
+       
+            <h6 style="padding-top:.5em;padding-left:2.4em;padding-bottom:2em;color:rgb(40, 115, 236)" data-bs-toggle="modal" data-bs-target="#addressModal">Change Adrress</h6>
+
+        </div>
+        {% comment %} <div>
+            <a href="{% url "placeorder" %}"><button type="submit">order</button></a>
+          
+        </div> {% endcomment %}
+    </div>
+    <!-- Button trigger modal -->
+            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Launch demo modal
+            </button> -->
+            
+            <!-- Modal -->
+            <div class="modal fade" id="addressModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header"style="background-color: rgb(247, 231, 243);align-items:center;text-align:center">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit address</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            {% comment %} <div>
+                                <h6>Enter your Name</h6>
+                                <input type="text" name="name" value="{{ exist_name }}" required>
+                            </div> {% endcomment %}
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Name*</label>
+                                <input type="name" class="form-control" id="exampleInputPassword1" name='name'value="{{ exist_name }}" required> 
+                            </div>
+                    
+                            {% comment %} <div>
+                                <h6>Enter your Mobile</h6>
+                                <input type="text" name="mobile" value="{{ exist_mobile }}" required>
+                            </div> {% endcomment %}
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Mobile*</label>
+                                <input type="name" class="form-control" id="exampleInputPassword1" name="mobile" value="{{ exist_mobile }}" required> 
+                            </div>
+                    
+                            {% comment %} <div>
+                                <h6>Enter your Pincode</h6>
+                                <input type="text" name="pincode" value="{{ exist_pincode }}" required>
+                            </div> {% endcomment %}
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Pincode*</label>
+                                <input type="name" class="form-control" id="exampleInputPassword1" name="pincode"value="{{ exist_pincode }}" required> 
+                            </div>
+                    
+                            {% comment %} <div>
+                                <h6>Enter your Locality</h6>
+                                <input type="text" name="locality" value="{{ exist_locality }}" required>
+                            </div> {% endcomment %}
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Locality*</label>
+                                <input type="name" class="form-control" id="exampleInputPassword1" name="locality" value="{{ exist_locality }}" required> 
+                            </div>
+                    
+                            {% comment %} <div>
+                                <h6>Enter your Flat/Building</h6>
+                                <input type="text" name="flat_building" value="{{ exist_flat }}" required>
+                            </div> {% endcomment %}
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Flat/Building name or number*</label>
+                                <input type="name" class="form-control" id="exampleInputPassword1" name="flat_building"  value="{{ exist_flat }}" required> 
+                            </div>
+                            {% comment %} <div>
+                                <h6>Enter your Landmark</h6>
+                                <input type="text" name="landmark" value="{{ exist_landmark }}">
+                            </div> {% endcomment %}
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Landmark</label>
+                                <input type="name" class="form-control" id="exampleInputPassword1" name="landmark" value="{{ exist_landmark }}" > 
+                            </div>
+                            {% comment %} <div>
+                                <h6>Enter your City</h6>
+                                <input type="text" name="city" value="{{ exist_city }}" required>
+                            </div> {% endcomment %}
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">City*</label>
+                                <input type="name" class="form-control" id="exampleInputPassword1" name="city" value="{{ exist_city }}" required> 
+                            </div>
+                    
+                            {% comment %} <div>
+                                <h6>Enter your State</h6>
+                                <input type="text" name="state" value="{{ exist_state }}" required>
+                            </div> {% endcomment %}
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">State*</label>
+                                <input type="name" class="form-control" id="exampleInputPassword1" name="state" value="{{ exist_state }}" required> 
+                            </div>
+                    
+                             {% comment %} <div>
+                                <button type='submit'>Order</button>
+                            </div> {% endcomment %}
+                            <div style="padding-inline: 0;" class="mb-3 form-check">
+                                <button style="background-color:rgb(79, 7, 48);border:none;border-radius:0px" type="submit" class="btn btn-primary btn-sm">Order</button>
+  
+                            </div>
+                        </form>
+                
+                    </div>
+                    <div class="modal-footer">
+                    {% comment %} <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button> {% endcomment %}
+                    
+                    </div>
+                </div>
+                </div>
+            </div>
+
+
+    <div style="background-color: rgb(245, 244, 245);">
+        <!-- <form action="" method="POST">
+            {% csrf_token %}
+            <div>
+                <h6>Enter your Name</h6>
+                <input type="text" name="name" value="{{ exist_name }}" required>
+            </div>
+    
+            <div>
+                <h6>Enter your Mobile</h6>
+                <input type="text" name="mobile" value="{{ exist_mobile }}" required>
+            </div>
+    
+            <div>
+                <h6>Enter your Pincode</h6>
+                <input type="text" name="pincode" value="{{ exist_pincode }}" required>
+            </div>
+    
+            <div>
+                <h6>Enter your Locality</h6>
+                <input type="text" name="locality" value="{{ exist_locality }}" required>
+            </div>
+    
+            <div>
+                <h6>Enter your Flat/Building</h6>
+                <input type="text" name="flat_building" value="{{ exist_flat }}" required>
+            </div>
+    
+            <div>
+                <h6>Enter your Landmark</h6>
+                <input type="text" name="landmark" value="{{ exist_landmark }}">
+            </div>
+    
+            <div>
+                <h6>Enter your City</h6>
+                <input type="text" name="city" value="{{ exist_city }}" required>
+            </div>
+    
+            <div>
+                <h6>Enter your State</h6>
+                <input type="text" name="state" value="{{ exist_state }}" required>
+            </div>
+    
+            <div>
+                <button type='submit'>Order</button>
+            </div>
+        </form> -->
+    
+    </div>
+    
+</div>
+{% endblock contents %}

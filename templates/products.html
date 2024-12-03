@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% extends "common.html" %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Products{% endblock title %}</title>
+</head>
+<body>
+    {% block contents %}
+    {% for i in products %}
+     <img src="{{i.image.url}}" alt="">
+     <h4>{{i.name}}</h4>
+     <p>{{i.describein1}}</p>
+     <h4>{{i.category}}</h4>
+     <h4>{{i.catcategory}}</h4>
+    {% endfor %}
+    {% endblock contents %}
+</body>
+</html>

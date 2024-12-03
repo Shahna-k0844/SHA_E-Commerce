@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% extends "common.html" %}
+{% load static %}
+{% block contents %}
+    <div class="container mt-5" style="padding-bottom:5em">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header text-center" style="background-color: rgb(247, 231, 243);">
+                        <img style="height: 40px; width: 70px" class="card-title fs-5" src="{% static 'images/logo.png' %}" alt="logo">
+                    </div>
+                    <div class="card-body">
+                        <form action="{% url 'login_page' %}" method="post">
+                            {% csrf_token %}
+                            <h4 class="text-center" style="color:black;">Login</h4>
+
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="email" name="username" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+
+                            <div class="mb-3" style="padding-left:11.3em;padding-top:2em">
+                                <button style="background-color:rgb(79, 7, 48);border:none;border-radius:0px;padding-inline:6em" type="submit" class="btn btn-primary btn-sm">Login</button>
+                            </div>
+
+                            <div class="text-center">
+                                <p>Don't have an account? <a href="{% url 'signup_page' %}" class="text-decoration-none">Sign up</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    {% endblock contents %}

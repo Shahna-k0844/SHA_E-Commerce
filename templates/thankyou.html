@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% extends "common.html" %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}thank{% endblock title %}</title>
+</head>
+<body>
+    {% include "header.html" %}
+    {% block contents %}
+    <div style="padding: 9em;">
+        <h1>THANKYOU</h1>
+        <a href="{% url "home" %}">
+        continue shopping
+        </a>
+
+    </div>
+
+    {% endblock contents %}
+</body>
+</html>
